@@ -16,3 +16,15 @@ anyways, todo:
 
 
 After that it's just doing some cleanup work : )
+
+
+
+
+v->LDID
+
+https://youtube.googleapis.com/youtube/v3/videos?part=liveStreamingDetails&id=[V_ID]&key=[KEY]
+
+
+LDID->CHAT
+
+https://youtube.googleapis.com/youtube/v3/liveChat/messages?liveChatId=[LC_ID]&part=authorDetails&maxResults=75&pageToken=[page_token]&key=[YOUR_API_KEY]
