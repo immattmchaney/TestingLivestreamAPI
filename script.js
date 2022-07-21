@@ -5,6 +5,8 @@
    */
 
   var apiKey = "";
+  var videoID = "";
+  var liveID = "Cg0KCzBhV2lqdWtTQ2pRKicKGFVDS0pleGFkQ2VObzNsdTBVMjBza21OZxILMGFXaWp1a1NDalE";
 
   function authenticate() {
     return gapi.auth2.getAuthInstance()
@@ -21,7 +23,7 @@
   // Make sure the client is loaded and sign-in is complete before calling this method.
   function execute() {
     return gapi.client.youtube.liveChatMessages.list({
-      "liveChatId": "Cg0KCzBhV2lqdWtTQ2pRKicKGFVDS0pleGFkQ2VObzNsdTBVMjBza21OZxILMGFXaWp1a1NDalE",
+      "liveChatId": liveID,
       "part": [
         "authorDetails"
       ],
@@ -33,14 +35,28 @@
               },
               function(err) { console.error("Execute error", err); });
   }
-  
-	  gapi.load("client:auth2", function() {
-        gapi.auth2.init({client_id: "NONE"});
-        });
+  function executeVidToLSDeets() {
+    return gapi.client.youtube.videos.list({
+      "part": [
+        "liveStreamingDetails"
+      ],
+      "id": [
+        videoID
+      ]
+    })
+        .then(function(response) {
+                // Handle the results here (response.result has the parsed body).
+                console.log("Response", response);
+              },
+              function(err) { console.error("Execute error", err); });
+  }
+  gapi.load("client:auth2", function() {
+    gapi.auth2.init({client_id: "NONE"});
+    });
   
   function loadVars() {
 	  apiKey = document.getElementById("apiN").value
-	  videoID = document.getElementById("vidURL").value
+	  videoID = document.getElementById("vidURL").value.match(/^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube(-nocookie)?\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?$/)
   }
   
   
