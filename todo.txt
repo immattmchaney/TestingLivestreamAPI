@@ -1,0 +1,18 @@
+jeez
+
+feeling like I'm not welcome here, lol
+
+anyways, todo:
+
+0. Tie in a 'URL' entry to strip video ID from the link, remove the CLIENT KEY part (also make it load the API from the start to avoid the effery)
+1. Create the start/stop buttons to start/stop the loop of listening
+2. Quickly cycle through first few pages? Til the results stop hitting max? Or figure out if it's easy to hit the most recent comments
+3. Start the loop of continually listening, cut out when the stop button is pressed
+4. Create a username data holder, tie to reset button
+5. Create a dynamically-updated listbox, include names & post times
+6. Pull from the pages, check if the name exists, add
+7. Tie everything together
+8. Get the stupid API shit cleaned up so it can fail successfully
+
+
+After that it's just doing some cleanup work : )
