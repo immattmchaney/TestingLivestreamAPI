@@ -22,7 +22,7 @@
   // Make sure the client is loaded and sign-in is complete before calling this method.
   function execute() {
     return gapi.client.youtube.liveChatMessages.list({
-      "liveChatId": "Cg0KC0JUNWg1Z0hyZmh3KicKGFVDbHhydDRwUm1hcVFuU2xEaWkzRUpCURILQlQ1aDVnSHJmaHc",
+      "liveChatId": "Cg0KCzBhV2lqdWtTQ2pRKicKGFVDS0pleGFkQ2VObzNsdTBVMjBza21OZxILMGFXaWp1a1NDalE",
       "part": [
         "authorDetails"
       ],
