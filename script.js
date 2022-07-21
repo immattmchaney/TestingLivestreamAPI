@@ -5,7 +5,6 @@
    */
 
   var apiKey = "";
-  var clientKey = "";
 
   function authenticate() {
     return gapi.auth2.getAuthInstance()
@@ -35,15 +34,13 @@
               function(err) { console.error("Execute error", err); });
   }
   
-  function loadGAPI() {
 	  gapi.load("client:auth2", function() {
-        gapi.auth2.init({client_id: clientKey});
+        gapi.auth2.init({client_id: "NONE"});
         });
-  }
   
   function loadVars() {
 	  apiKey = document.getElementById("apiN").value
-	  clientKey = document.getElementById("clientKey").value
+	  videoID = document.getElementById("vidURL").value
   }
   
   
