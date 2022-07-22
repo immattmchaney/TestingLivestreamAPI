@@ -52,7 +52,8 @@
         .then(function(response) {
                 // Handle the results here (response.result has the parsed body).
 	        lsDeets = response;
-                console.log("Response", response);
+	        liveID = lsDeets.result['items'][0]['liveStreamingDetails']['activeLiveChatId']
+                //console.log("Response", response);
               },
               function(err) { console.error("Execute error", err); });
     return lsDeets
