@@ -25,7 +25,7 @@
   }
   // Make sure the client is loaded and sign-in is complete before calling this method.
   function execute() {
-    messageDeets = gapi.client.youtube.liveChatMessages.list({
+    gapi.client.youtube.liveChatMessages.list({
       "liveChatId": liveID,
       "part": [
         "authorDetails"
@@ -34,13 +34,14 @@
     })
         .then(function(response) {
                 // Handle the results here (response.result has the parsed body).
+	        messageDeets = response;
                 console.log("Response", response);
               },
               function(err) { console.error("Execute error", err); });
     return messageDeets
   }
   function executeVidToLSDeets() {
-    lsDeets = JSON.parse(gapi.client.youtube.videos.list({
+    gapi.client.youtube.videos.list({
       "part": [
         "liveStreamingDetails"
       ],
@@ -50,9 +51,10 @@
     })
         .then(function(response) {
                 // Handle the results here (response.result has the parsed body).
+	        lsDeets = response;
                 console.log("Response", response);
               },
-              function(err) { console.error("Execute error", err); }));
+              function(err) { console.error("Execute error", err); });
     return lsDeets
   }
   gapi.load("client:auth2", function() {
