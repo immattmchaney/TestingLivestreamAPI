@@ -10,6 +10,7 @@
 
   var messageDeets = null;
   var lsDeets = null;
+  var running = false;
   
   const names = [];
   var currentIndex = 0;
@@ -41,6 +42,9 @@
 	        messageDeets = response;
                 //console.log("Response", response);
 			populateTable();
+			if(running) {
+			    setTimeout(execute, messageDeets.result.pollingIntervalMillis)
+			}
               },
               function(err) { console.error("Execute error", err); });
     return messageDeets
@@ -59,6 +63,7 @@
 	        lsDeets = response;
 	        liveID = lsDeets.result['items'][0]['liveStreamingDetails']['activeLiveChatId']
                 //console.log("Response", response);
+			running = true;
 	        execute();
               },
               function(err) { console.error("Execute error", err); });
@@ -74,7 +79,7 @@
   }
 
   function populateTable() {
-	for(int i = 0; i < messageDeets['result']['items'].length; i++) {
+	for(var i = 0; i < messageDeets['result']['items'].length; i++) {
 		names.push([ messageDeets['result']['items'][i]['authorDetails']['displayName'], messageDeets['result']['items'][i]['snippet']['publishedAt']]);
 	}
   
@@ -89,6 +94,8 @@
     });
 	currentIndex = names.length;
   }
+  
+  function stopRunning() { running = false; }
 
   function resetTable() {
     var table = document.getElementById('messageTbl');
