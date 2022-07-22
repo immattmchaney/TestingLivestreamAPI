@@ -91,7 +91,7 @@
       date.innerHTML = names[i][0];
       let name = row.insertCell(1);
       name.innerHTML = names[i][1];
-    });
+    }
 	currentIndex = names.length;
   }
   
