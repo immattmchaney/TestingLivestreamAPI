@@ -8,6 +8,9 @@
   var videoID = "";
   var liveID = "Cg0KCzBhV2lqdWtTQ2pRKicKGFVDS0pleGFkQ2VObzNsdTBVMjBza21OZxILMGFXaWp1a1NDalE";
 
+  var messageDeets = null;
+  var lsDeets = null;
+
   function authenticate() {
     return gapi.auth2.getAuthInstance()
         .signIn({scope: "https://www.googleapis.com/auth/youtube.readonly"})
@@ -22,7 +25,7 @@
   }
   // Make sure the client is loaded and sign-in is complete before calling this method.
   function execute() {
-    return gapi.client.youtube.liveChatMessages.list({
+    messageDeets = gapi.client.youtube.liveChatMessages.list({
       "liveChatId": liveID,
       "part": [
         "authorDetails"
@@ -34,9 +37,10 @@
                 console.log("Response", response);
               },
               function(err) { console.error("Execute error", err); });
+    return messageDeets
   }
   function executeVidToLSDeets() {
-    return gapi.client.youtube.videos.list({
+    lsDeets = gapi.client.youtube.videos.list({
       "part": [
         "liveStreamingDetails"
       ],
@@ -49,6 +53,7 @@
                 console.log("Response", response);
               },
               function(err) { console.error("Execute error", err); });
+    return lsDeets
   }
   gapi.load("client:auth2", function() {
     gapi.auth2.init({client_id: "NONE"});
