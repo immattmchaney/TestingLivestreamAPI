@@ -31,6 +31,7 @@
   }
   // Make sure the client is loaded and sign-in is complete before calling this method.
   function execute() {
+    if(!running) return;
     gapi.client.youtube.liveChatMessages.list({
       "liveChatId": liveID,
       "part": [
@@ -46,9 +47,7 @@
                 //console.log("Response", response);
 			populateTable();
 			nextPageT = messageDeets.result.nextPageToken;
-			if(running) {
-			    setTimeout(execute, messageDeets.result.pollingIntervalMillis)
-			}
+			setTimeout(execute, messageDeets.result.pollingIntervalMillis)
               },
               function(err) { console.error("Execute error", err); });
     return messageDeets
