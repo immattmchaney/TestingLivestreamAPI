@@ -84,7 +84,12 @@
 
   function populateTable() {
 	for(var i = 0; i < messageDeets['result']['items'].length; i++) {
-		names.push([ messageDeets['result']['items'][i]['authorDetails']['displayName'], messageDeets['result']['items'][i]['snippet']['publishedAt']]);
+		var found = false;
+		for(var j = 0; j < names.length; j++) {
+			if(messageDeets['result']['items'][i]['authorDetails']['displayName'] == names[j][0])
+				found = true;
+		}
+		if(!found) names.push([ messageDeets['result']['items'][i]['authorDetails']['displayName'], messageDeets['result']['items'][i]['snippet']['publishedAt']]);
 	}
   
     var table = document.getElementById('messageTbl');
