@@ -12,6 +12,8 @@
   var lsDeets = null;
   var running = false;
   
+  var nextPageT = "";
+
   const names = [];
   var currentIndex = 0;
 
@@ -35,13 +37,15 @@
         "authorDetails",
 		"snippet"
       ],
-      "maxResults": 75
+      "maxResults": 75,
+      "pageToken": nextPageT
     })
         .then(function(response) {
                 // Handle the results here (response.result has the parsed body).
 	        messageDeets = response;
                 //console.log("Response", response);
 			populateTable();
+			nextPageT = messageDeets.result.nextPageToken;
 			if(running) {
 			    setTimeout(execute, messageDeets.result.pollingIntervalMillis)
 			}
@@ -95,13 +99,15 @@
 	currentIndex = names.length;
   }
   
-  function stopRunning() { running = false; }
+  function stopRunning() { running = false; nextPageT = ""; }
 
   function resetTable() {
     var table = document.getElementById('messageTbl');
 	
     while(table.rows.length) { table.deleteRow(0); }
 	while (names.length) { names.pop(); }
+	  
+    stopRunning();
   }
   
   
