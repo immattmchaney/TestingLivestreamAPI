@@ -63,5 +63,17 @@
 	  apiKey = document.getElementById("apiN").value
 	  videoID = document.getElementById("vidUrl").value.match(/^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube(-nocookie)?\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?$/)[6]
   }
+
+  function populateTable(messagesObj) {
+    var table = document.getElementById('messageTbl');
+  }
+
+  function resetTable() {
+    var table = document.getElementById('messageTbl');
+    var rowCount = table.rows.length;
+    while(table.rows.length > 0) {
+      table.deleteRow(0);
+    }
+  }
   
   
