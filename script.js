@@ -67,8 +67,15 @@
 	  videoID = document.getElementById("vidUrl").value.match(/^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube(-nocookie)?\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?$/)[6]
   }
 
-  function populateTable(messagesObj) {
+  function populateTable() {
     var table = document.getElementById('messageTbl');
+    messageDeets['result']['items'].forEach( item => {
+      let row = table.insertRow();
+      let date = row.insertCell(0);
+      date.innerHTML = item['authorDetails']['displayName'];
+      let name = row.insertCell(1);
+      name.innerHTML = item['authorDetails']['displayName'];
+    });
   }
 
   function resetTable() {
