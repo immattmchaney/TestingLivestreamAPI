@@ -77,7 +77,7 @@
       let date = row.insertCell(0);
       date.innerHTML = item['authorDetails']['displayName'];
       let name = row.insertCell(1);
-      name.innerHTML = item['snippet']['publishedAt'].toTimeString();
+      name.innerHTML = Date.parse(item['snippet']['publishedAt']).toTimeString();
     });
   }
 
