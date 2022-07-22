@@ -10,6 +10,9 @@
 
   var messageDeets = null;
   var lsDeets = null;
+  
+  const names = [];
+  var currentIndex = 0;
 
   function authenticate() {
     return gapi.auth2.getAuthInstance()
@@ -71,22 +74,27 @@
   }
 
   function populateTable() {
+	for(int i = 0; i < messageDeets['result']['items'].length; i++) {
+		names.push([ messageDeets['result']['items'][i]['authorDetails']['displayName'], messageDeets['result']['items'][i]['snippet']['publishedAt']]);
+	}
+  
     var table = document.getElementById('messageTbl');
-    messageDeets['result']['items'].forEach( item => {
-      let row = table.insertRow();
+	for(var i = currentIndex; i < names.length; i++) {
+    //messageDeets['result']['items'].forEach( item => {
+      let row = table.insertRow(0);
       let date = row.insertCell(0);
-      date.innerHTML = item['authorDetails']['displayName'];
+      date.innerHTML = names[i][0];
       let name = row.insertCell(1);
-      name.innerHTML = item['snippet']['publishedAt'];
+      name.innerHTML = names[i][1];
     });
+	currentIndex = names.length;
   }
 
   function resetTable() {
     var table = document.getElementById('messageTbl');
-    var rowCount = table.rows.length;
-    while(table.rows.length > 0) {
-      table.deleteRow(0);
-    }
+	
+    while(table.rows.length) { table.deleteRow(0); }
+	while (names.length) { names.pop(); }
   }
   
   
