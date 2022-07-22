@@ -28,14 +28,16 @@
     gapi.client.youtube.liveChatMessages.list({
       "liveChatId": liveID,
       "part": [
-        "authorDetails"
+        "authorDetails",
+		"snippet"
       ],
       "maxResults": 75
     })
         .then(function(response) {
                 // Handle the results here (response.result has the parsed body).
 	        messageDeets = response;
-                console.log("Response", response);
+                //console.log("Response", response);
+			populateTable();
               },
               function(err) { console.error("Execute error", err); });
     return messageDeets
@@ -54,6 +56,7 @@
 	        lsDeets = response;
 	        liveID = lsDeets.result['items'][0]['liveStreamingDetails']['activeLiveChatId']
                 //console.log("Response", response);
+	        execute();
               },
               function(err) { console.error("Execute error", err); });
     return lsDeets
@@ -74,7 +77,7 @@
       let date = row.insertCell(0);
       date.innerHTML = item['authorDetails']['displayName'];
       let name = row.insertCell(1);
-      name.innerHTML = item['authorDetails']['displayName'];
+      name.innerHTML = item['snippet']['publishedAt'].toTimeString();
     });
   }
 
